@@ -28,4 +28,3 @@ public class RomanToInteger {
         return integerValue + map.get(s.charAt(s.length() - 1));
     }
 }
-
