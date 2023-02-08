@@ -1,0 +1,33 @@
+import java.util.Arrays;
+
+/**
+ * You are given a 0-indexed array of integers nums of length n. You are initially positioned at nums[0].
+ * Each element nums[i] represents the maximum length of a forward jump from index i. In other words,
+ * if you are at nums[i], you can jump to any nums[i + j] where:
+ * 0 <= j <= nums[i] and
+ * i + j < n
+ * Return the minimum number of jumps to reach nums[n - 1].
+ * The test cases are generated such that you can reach nums[n - 1].
+ */
+public class JumpGameII {
+    public static void main(String[] args) {
+        int[] nums = new int[]{2, 3, 1, 1, 4};
+        JumpGameII jumpGameII = new JumpGameII();
+        System.out.println(jumpGameII.jump(nums));
+    }
+
+    public int jump(int[] nums) {
+        int length = nums.length;
+        int[] jumps = new int[length];
+        Arrays.fill(jumps, Integer.MAX_VALUE);
+        jumps[0] = 0;
+        for (int i = 0; i < length; i++) {
+            for (int j = 1; j <= nums[i]; j++) {
+                if (i + j < length) {
+                    jumps[i + j] = Math.min(jumps[i + j], jumps[i] + 1);
+                }
+            }
+        }
+        return jumps[length - 1];
+    }
+}
